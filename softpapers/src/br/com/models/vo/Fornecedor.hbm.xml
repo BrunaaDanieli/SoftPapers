@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/08/2015 02:48:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.com.models.vo.Fornecedor" table="fornecedor" catalog="dbloja" optimistic-lock="version">
+        <id name="idFornecedor" type="java.lang.Long">
+            <column name="idFornecedor" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="contato" class="br.com.models.vo.Contato" fetch="select">
+            <column name="contatoFornecedor" />
+        </many-to-one>
+        <many-to-one name="endereco" class="br.com.models.vo.Endereco" fetch="select">
+            <column name="enderecoFornecedor" />
+        </many-to-one>
+        <many-to-one name="pessoa" class="br.com.models.vo.Pessoa" fetch="select">
+            <column name="pessoaFornecedor" />
+        </many-to-one>
+        <property name="nomeFornecedor" type="string">
+            <column name="nomeFornecedor" length="50" />
+        </property>
+        <property name="criacaoFornecedor" type="timestamp">
+            <column name="criacaoFornecedor" length="19" />
+        </property>
+        <property name="atualizacaoFornecedor" type="timestamp">
+            <column name="atualizacaoFornecedor" length="19" />
+        </property>
+        <set name="compras" table="compra" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fornecedorCompra" />
+            </key>
+            <one-to-many class="br.com.models.vo.Compra" />
+        </set>
+        <set name="produtos" table="produto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fornecedorProduto" />
+            </key>
+            <one-to-many class="br.com.models.vo.Produto" />
+        </set>
+    </class>
+</hibernate-mapping>

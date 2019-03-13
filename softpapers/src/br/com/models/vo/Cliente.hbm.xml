@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/08/2015 02:48:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.com.models.vo.Cliente" table="cliente" catalog="dbloja" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Long">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="contato" class="br.com.models.vo.Contato" fetch="select">
+            <column name="contatoCliente" />
+        </many-to-one>
+        <many-to-one name="endereco" class="br.com.models.vo.Endereco" fetch="select">
+            <column name="enderecoCliente" />
+        </many-to-one>
+        <many-to-one name="pessoa" class="br.com.models.vo.Pessoa" fetch="select">
+            <column name="pessoaCliente" />
+        </many-to-one>
+        <property name="nomeCliente" type="string">
+            <column name="nomeCliente" length="50" />
+        </property>
+        <property name="salarioCliente" type="big_decimal">
+            <column name="salarioCliente" precision="10" />
+        </property>
+        <property name="limiteCliente" type="big_decimal">
+            <column name="limiteCliente" precision="10" />
+        </property>
+        <property name="descontoCliente" type="big_decimal">
+            <column name="descontoCliente" precision="10" />
+        </property>
+        <property name="criacaoCliente" type="timestamp">
+            <column name="criacaoCliente" length="19" />
+        </property>
+        <property name="atualizacaoCliente" type="timestamp">
+            <column name="atualizacaoCliente" length="19" />
+        </property>
+        <set name="vendas" table="venda" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="clienteVenda" />
+            </key>
+            <one-to-many class="br.com.models.vo.Venda" />
+        </set>
+    </class>
+</hibernate-mapping>
